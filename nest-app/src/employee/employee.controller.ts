@@ -1,4 +1,4 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EmployeeEntity } from 'src/entities/employee.entity';
 import { Repository } from 'typeorm';
@@ -14,6 +14,10 @@ export class EmployeeController {
         e.age = '20';
         e.address = 'dl';
         await this.employeeRespository.save(e);
+    }
+    @Get('/all')
+    public async findEmployee() {
+        return await this.employeeRespository.find();
     }
 
 }
