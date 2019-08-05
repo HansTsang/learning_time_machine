@@ -12,7 +12,9 @@ export class AuthService {
         private readonly userService: UserService,
     ) { }
     async createToken(name: string, password: string): Promise<any> {
-        const user = { name };
+        // tslint:disable-next-line:no-console
+        console.log(`${name}===========${password}`);
+        const user: JwtPayload = { name, password };
         const accessToken = jwt.sign(user, 'secretKey', { expiresIn: 3600 });
         return { accessToken };
     }

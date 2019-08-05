@@ -21,10 +21,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         // tslint:disable-next-line:no-console
         console.log('entered jwt');
         const user = await this.authService.validateUser(payload.name);
-        // if (!user) {
-        //     return done(new UnauthorizedException(), false);
-        // }
-        // done(null, user);
         if (!user) {
             throw new UnauthorizedException();
         }

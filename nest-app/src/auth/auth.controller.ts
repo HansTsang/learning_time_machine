@@ -6,16 +6,16 @@ import { callback } from './jwt.strategy';
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) { }
-    @Get('login/:name/:password')
+    @Post('login')
     @HttpCode(HttpStatus.OK)
-    async login(@Param() params): Promise<any> {
+    async login(@Body() userDto): Promise<any> {
         // tslint:disable-next-line:no-console
-        console.log(params);
-        return this.authService.login(params.name, params.password);
+        console.log(userDto);
+        return this.authService.login(userDto.name, userDto.password);
     }
     @Get('checklogin')
     @UseGuards(AuthGuard('jwt'))
-    // @UseGuards(new RoleGuard(['admin']))
+    // @UseGuards()
     public checkLogin() {
         return 'valid user:' + this.authService.getUser().name;
     }
